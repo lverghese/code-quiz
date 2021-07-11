@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+}
+
+header {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+header h1 {
+    color: teal;
+
+}
+
+header p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    float: right;
+}
+
+.quiz-intro {
+    margin: 100px 150px;
+    align-items: center;
+    padding: 100px 550px;
+    display: flex;
+    flex-wrap: wrap;
+}

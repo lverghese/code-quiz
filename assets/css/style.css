@@ -18,6 +18,8 @@ header {
 
 header h1 {
     color: teal;
+    font-size: medium;
+    padding-left: 10px;
 
 }
 
@@ -26,12 +28,40 @@ header p {
     flex-wrap: wrap;
     justify-content: space-between;
     float: right;
+    padding-right: 10px;
 }
 
 .quiz-intro {
     margin: 100px 150px;
     align-items: center;
-    padding: 100px 550px;
+    padding: 50px 550px;
     display: flex;
     flex-wrap: wrap;
 }
+
+.quiz-intro h2 {
+    font-weight: bolder;
+}
+
+.quiz-intro p {
+    padding: 10px 0px;
+}
+
+.questions {
+    margin: 100px 150px;
+    align-items: center;
+    padding: 50px 550px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.questions button {
+   display: block;
+   padding: 5px;
+} 
+
+
+
+
+
+

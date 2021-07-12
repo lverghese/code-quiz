@@ -45,6 +45,7 @@ header p {
 
 .quiz-intro p {
     padding: 10px 0px;
+    text-align: center;
 }
 
 .questions {
@@ -65,6 +66,10 @@ header p {
     align-items: center;
     padding: 50px 550px;
     display: block;
+}
+
+button {
+background-color: violet;
 }
 
 

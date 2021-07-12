@@ -60,7 +60,15 @@ header p {
    padding: 5px;
 } 
 
+.finish {
+    margin: 100px 150px;
+    align-items: center;
+    padding: 50px 550px;
+    display: block;
+}
 
+
+   
 
 
 

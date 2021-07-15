@@ -12,7 +12,7 @@
     <div class="body-wrap">
         <header>
             <h1 id="viewHigh">View Highscores</h1>
-            <p>Time: <span id="timer">0</span></p>
+            <p>Time: <span id="timer">75</span></p>
 
 
         </header>
@@ -21,28 +21,28 @@
         <div class="box-wrapper" id="intro">
             <h2 class="bold">Coding Quiz Challenge</h2>
             <p>The following questions in this quiz are code-related to test your understanding of the fundamentals of web development. You start with 75 on the time, every time you choose an incorrect answer, 15 time will be taken. Press the button below to begin.</p>
-            <button id="start" class="btn" id="quizStart">Start Quiz</button>
+            <button class="btn" id="quizStart">Start Quiz</button>
         </div>
 
         <!-- Quiz Setup -->
-        <div class="box-wrapper">
+        <div class="box-wrapper" id="question-wrapper">
                 <h2 class="quetitle" id="questions"></h2>
 
                 <div class="box-wrapper" id="answers">
                     <div class="line">
-                        <button type="button" class="btn" id="0"></button>
+                        <button type="button" class="btn hiddenButton" id="btn0"></button>
                     </div>
                     <div class="line">
-                        <button type="button" class="btn" id="1"></button>
+                        <button type="button" class="btn hiddenButton" id="btn1"></button>
                     </div>
                     <div class="line">
-                        <button type="button" class="btn" id="2"></button>
+                        <button type="button" class="btn hiddenButton" id="btn2"></button>
                     </div>
                     <div class="line">
-                        <button type="button" class="btn" id="3"></button>
+                        <button type="button" class="btn hiddenButton" id="btn3"></button>
                     </div>
                     <div class="line">
-                        <button type="button" class="btn" id="4"></button>
+                        <button type="button" class="btn hiddenButton" id="btn4"></button>
                     </div>
 
 
@@ -51,7 +51,7 @@
         </div>
 
         <!-- Quiz Finish Screen -->
-        <div style="display:none;" class="finish">
+        <div style="display:none;" class="finish" id="finalScreen">
             <h2 class="bold">All done!</h2>
             <p>Your final score is: <span id="score"></span></p>
             <p>Enter initials: <input type="text " id="name"></p>

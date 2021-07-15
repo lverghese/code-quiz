@@ -64,5 +64,8 @@ border-radius: 10px;
 color: white;
 }
 
+.hiddenButton {
+    display: none;
+}
 
 

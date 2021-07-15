@@ -31,7 +31,7 @@ header p {
     padding-right: 10px;
 }
 
-.quiz-intro {
+.box-wrapper {
     margin: 100px 150px;
     align-items: center;
     padding: 50px 550px;
@@ -39,27 +39,16 @@ header p {
     flex-wrap: wrap;
 }
 
-.quiz-intro h2 {
+.box-wrapper h2 {
     font-weight: bolder;
 }
 
-.quiz-intro p {
+.box-wrapper p {
     padding: 10px 0px;
     text-align: center;
 }
 
-.questions {
-    margin: 100px 150px;
-    align-items: center;
-    padding: 50px 550px;
-    display: flex;
-    flex-wrap: wrap;
-}
 
-.questions button {
-   display: block;
-   padding: 5px;
-} 
 
 .finish {
     margin: 100px 150px;
@@ -69,12 +58,11 @@ header p {
 }
 
 button {
-background-color: violet;
+background-color: rgb(129, 67, 129);
+padding: 10px;
+border-radius: 10px;
+color: white;
 }
-
-
-   
-
 
 
 

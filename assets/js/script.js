@@ -5,13 +5,13 @@ var questions = [
         choices: ["strings", "booleans", "alerts", "numbers"],
         answer: "alerts"
     },
-
+ 
     {
         quetitle: "The condition in an if / else statement is enclosed with _____.",
         choices: ["quotes", "curly brackets", "parantheses", "square brackets"],
         answer: "parantheses"
     },
-
+ 
     {
         quetitle: "Arrays in javascript can be used to score:",
         choices: ["numbers and things", "other arrays", "booleans", "all of the above"],
@@ -22,134 +22,192 @@ var questions = [
         choices: ["commas", "curly brackets", "quotes", "parantheses"],
         answer: "parantheses"
     }
-
+ 
 ];
-
-
-var totalScore = 75;
-var timer = document.getElementById("timer");
+ 
+ 
+var totalScore = 0;
+var timeClock = 75;
+var scoreClock = document.getElementById("scoreClock");
 var startBtn = document.querySelector("#quizStart");
 var questionTitle = document.getElementById("questions");
 var introBox = document.getElementById("intro");
-var finalScreen = document.getElementById("finalScreen")
+var finalScreen = document.getElementById("finalScreen");
 var btn0 = document.getElementById("btn0");
 var btn1 = document.getElementById("btn1");
 var btn2 = document.getElementById("btn2");
 var btn3 = document.getElementById("btn3");
 var questionWrapper = document.getElementById("question-wrapper");
-
-var startTimer = function() {
-    setInterval(function() {
-        totalScore -= 1;
-        if (totalScore <=0) {
-            timer.innerHTML = 0;
-        } else {
-            timer.innerHTML = totalScore;
-        }
-    }, 1000);
-}
-
-
-
+var submitNameBtn = document.getElementById("submitName");
+var highScoreBtn = document.getElementById("viewHigh");
+var scorePanel = document.getElementById("scorePanel");
+var scorePanelContent = document.getElementById("scorePanelContent");
+var answerMessage = document.getElementById("answerMessage");
+var finalScore = document.getElementById("finalScore");
+var resetBtn = document.getElementById("resetBtn");
+var clearScoresBtn = document.getElementById("clearScoresBtn");
+var currentQuestion = 0;
+ 
+//starts the time and subtracts 1 from total score every second
+ 
+var doTimer = setInterval(startClock, 1000);
+ 
+var startClock = function() {
+    timeClock--;
+    scoreClock.innerHTML = timeClock - totalScore;
+    if(timeClock - totalScore <= 0){
+        endGame();
+    }
+};
+ 
+//first function starts the questions and the scoreClock
 startBtn.addEventListener("click", function() {
-    introBox.style.display="none";
-    
+    introBox.style.display = "none";
     btn0.classList.remove("hiddenButton");
     btn1.classList.remove("hiddenButton");
     btn2.classList.remove("hiddenButton");
     btn3.classList.remove("hiddenButton");
-    
-    nextQuestion(0);
-    startTimer();
+    console.log("current q:" + currentQuestion);
+    nextQuestion();
+    startClock();
 });
-
-
-
-var checkAnswer = function(currentQuestion, currentAnswer) {
-
-
+ 
+//runs whenever an answer button is clicked
+var checkAnswer = function(currentAnswer) {
     var whatQuestion = questions[currentQuestion];
     var whatAnswer = whatQuestion.answer;
-    
-    if (currentAnswer === whatAnswer) {
-        console.log("right");
-        nextQuestion(currentQuestion += 1)
+    if (currentAnswer === whatAnswer){
+        //this is a correct answer
+        currentQuestion++;
+        nextQuestion();
+        answerMessage.innerHTML = "Correct!";
     } else {
-        console.log("wrong");
-        totalScore = totalScore - 15;
-        var scoreChange = document.getElementById("timer"); 
-        if (totalScore - 15 <= 0) {
-            scoreChange.innerHTML = 0;
-            
-        } else {
-            scoreChange.innerHTML = totalScore;
-        }
-        if (totalScore <= 0) {
-            questionWrapper.style.display="none";
-            finalScreen.style.display="block";
-        }
+        // this is an incorrect answer
+        currentQuestion++;
+        answerMessage.innerHTML = "Wrong!";
+        totalScore += 15;
+        nextQuestion();
+    }
+};
+ 
+ 
+//advances to the next question
+var nextQuestion = function() {
+    if (currentQuestion < questions.length){
+        var previousQuestion = currentQuestion -1;
+        var questionTitle = document.getElementById("questions");
+        if( currentQuestion === 0 ) {
+            console.log("HIT");
+            btn0.addEventListener("click", function() {
+                checkAnswer(questions[currentQuestion].choices[0]);
+            });
         
-    }
-
-
-    
-
+            btn1.addEventListener("click", function() {
+                checkAnswer(questions[currentQuestion].choices[1]);
+            });
+        
+            btn2.addEventListener("click", function() {
+                checkAnswer(questions[currentQuestion].choices[2]);
+            });
+        
+            btn3.addEventListener("click", function() {
+                checkAnswer(questions[currentQuestion].choices[3]);
+            });
+        };
+        questionTitle.innerHTML = questions[currentQuestion].quetitle;
+        btn0.innerHTML = questions[currentQuestion].choices[0];
+        btn1.innerHTML = questions[currentQuestion].choices[1];
+        btn2.innerHTML = questions[currentQuestion].choices[2];
+        btn3.innerHTML = questions[currentQuestion].choices[3];
+    } else {
+        endGame();
+    };
 };
-
-var saveScore = function() {
-    var playerNameField = document.getElementById("playerName");
-    if (localStorage.highscores.length === 0) {
-        localStorage.highscores = [
-            {
-                playerName: playerNameField.text
-            }
-         ]
+ 
+//ends the game
+var endGame = function(){
+    clearInterval(doTimer);
+    questionWrapper.style.display = "none";
+    finalScreen.style.display = "block";
+    finalScore.innerHTML = timeClock - totalScore;
+};
+ 
+ 
+ 
+ 
+// -------------------------------- END STUFF ----------------------------------
+ 
+//handles submitName button click event
+submitNameBtn.addEventListener("click", function(){
+    saveScore();
+});
+ 
+ 
+//saves final score in localStorage
+var saveScore = function(){
+    var scoreData = {
+            highScore: totalScore,
+            playerName: document.getElementById("playerName").value
+        }
+    if (localStorage.getItem("highScores") == null){
+        var newArray = []
+        newArray.push(scoreData)
+        localStorage.setItem("highScores", JSON.stringify(newArray));
+    } else {
+        var currentHighScores = JSON.parse(localStorage.getItem("highScores"))
+        currentHighScores.push(scoreData);
+        localStorage.setItem("highScores", JSON.stringify(currentHighScores))
     }
+    loadHighScores();
+ 
+};
+ 
+//loads high scores
+highScoreBtn.addEventListener("click", function(){ 
+    loadHighScores()
+});
+ 
+var loadHighScores = function(){
+    introBox.style.display = "none";
+    questionWrapper.style.display = "none";
+    finalScreen.style.display = "none";
+    scorePanel.style.display = "block";
+    var outputItem = ""
+    var currentHighScores = JSON.parse(localStorage.getItem("highScores"));
+    if (currentHighScores != null ){
+        for (i = 0; i < currentHighScores.length; i++){
+            outputItem = outputItem + ("PLAYER:" + currentHighScores[i].playerName + " SCORE:" + currentHighScores[i].highScore + "<br>")
+        }
+        scorePanelContent.innerHTML = outputItem
+    } else {
+        scorePanelContent.innerHTML = "There are no scores!";
+    };
+ 
+};
+ 
+clearScoresBtn.addEventListener("click", function(){
+    clearScores();
+});
+ 
+resetBtn.addEventListener("click", function(){
+    resetGame();
+});
+ 
+//init all variables and restart the game
+//TODO:  this needs to be fixed so that the game will run properly when reset
+var resetGame = function(){
+    currentQuestion = 0;
+    scorePanel.style.display = "none";
+    totalScore = 0;
+    timeClock = 75;
+    finalScreen.style.display = "none";
+    introBox.style.display = " block";
+    answerMessage.innerHTML = "";
+    playerName.value = "";
 }
-
-var nextQuestion = function(currentQuestion) {
-
-    var btn0 = document.getElementById("btn0");
-    var btn1 = document.getElementById("btn1");
-    var btn2 = document.getElementById("btn2");
-    var btn3 = document.getElementById("btn3");
-
-    console.log(currentQuestion);
-    
-    btn0.removeEventListener("click", function() {});
-    btn1.removeEventListener("click", function() {});
-    btn2.removeEventListener("click", function() {});
-    btn3.removeEventListener("click", function() {});
-
-    
-    
-    btn0.addEventListener("click", function() {
-        checkAnswer(currentQuestion, questions[currentQuestion].choices[0]);
-    });
-    
-    btn1.addEventListener("click", function() {
-        checkAnswer(currentQuestion, questions[currentQuestion].choices[1]);
-    });
-    
-    btn2.addEventListener("click", function() {
-        checkAnswer(currentQuestion, questions[currentQuestion].choices[2]);
-    });
-    
-    btn3.addEventListener("click", function() {
-        checkAnswer(currentQuestion, questions[currentQuestion].choices[3]);
-    });
-
-    var questionTitle = document.getElementById("questions");
-
-    questionTitle.innerHTML = questions[currentQuestion].quetitle;
-
-    btn0.innerHTML = questions[currentQuestion].choices[0];
-    btn1.innerHTML = questions[currentQuestion].choices[1];
-    btn2.innerHTML = questions[currentQuestion].choices[2];
-    btn3.innerHTML = questions[currentQuestion].choices[3];
-    
-};
-
-
-
-
+ 
+//clear all scores
+var clearScores = function(){
+    localStorage.removeItem("highScores");
+    loadHighScores();
+}

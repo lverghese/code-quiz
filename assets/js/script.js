@@ -40,16 +40,16 @@ var questionWrapper = document.getElementById("question-wrapper");
 
 var startTimer = function() {
     setInterval(function() {
-        updateScore(-1);
+        totalScore -= 1;
+        if (totalScore <=0) {
+            timer.innerHTML = 0;
+        } else {
+            timer.innerHTML = totalScore;
+        }
     }, 1000);
 }
 
-var updateScore = function(value) {
-    timer.innerHTML = totalScore + value;
-    console.log("jamo should be cut");
-    //timer stopping when something is clicked and needs to keep running
 
-}
 
 startBtn.addEventListener("click", function() {
     introBox.style.display="none";
@@ -77,12 +77,17 @@ var checkAnswer = function(currentQuestion, currentAnswer) {
     } else {
         console.log("wrong");
         totalScore = totalScore - 15;
-        var scoreChange = document.getElementById("timer");
-        scoreChange.innerHTML = totalScore; 
-        if (totalScore === 0) {
+        var scoreChange = document.getElementById("timer"); 
+        if (totalScore - 15 <= 0) {
+            scoreChange.innerHTML = 0;
+            
+        } else {
+            scoreChange.innerHTML = totalScore;
+        }
+        if (totalScore <= 0) {
             questionWrapper.style.display="none";
             finalScreen.style.display="block";
-        } 
+        }
         
     }
 
@@ -90,6 +95,17 @@ var checkAnswer = function(currentQuestion, currentAnswer) {
     
 
 };
+
+var saveScore = function() {
+    var playerNameField = document.getElementById("playerName");
+    if (localStorage.highscores.length === 0) {
+        localStorage.highscores = [
+            {
+                playerName: playerNameField.text
+            }
+         ]
+    }
+}
 
 var nextQuestion = function(currentQuestion) {
 

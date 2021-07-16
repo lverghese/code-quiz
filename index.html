@@ -8,13 +8,11 @@
     <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
-
+ 
     <div class="body-wrap">
         <header>
-            <h1 id="viewHigh">View Highscores</h1>
-            <p>Time: <span id="timer">75</span></p>
-
-
+            <h1 id="viewHigh" style="cursor: pointer">View Highscores</h1>
+            <p>Time: <span id="scoreClock">75</span></p>
         </header>
     
         <!-- Quiz Start Intro -->
@@ -23,11 +21,11 @@
             <p>The following questions in this quiz are code-related to test your understanding of the fundamentals of web development. You start with 75 on the time, every time you choose an incorrect answer, 15 time will be taken. Press the button below to begin.</p>
             <button class="btn" id="quizStart">Start Quiz</button>
         </div>
-
+ 
         <!-- Quiz Setup -->
         <div class="box-wrapper" id="question-wrapper">
                 <h2 class="quetitle" id="questions"></h2>
-
+ 
                 <div class="box-wrapper" id="answers">
                     <div class="line">
                         <button type="button" class="btn hiddenButton" id="btn0"></button>
@@ -44,31 +42,34 @@
                     <div class="line">
                         <button type="button" class="btn hiddenButton" id="btn4"></button>
                     </div>
-
-
                 </div>
-
+                <div id="answerMessage"></div>
+ 
         </div>
-
+ 
         <!-- Quiz Finish Screen -->
         <div style="display:none;" class="finish" id="finalScreen">
             <h2 class="bold">All done!</h2>
-            <p>Your final score is: <span id="score"></span></p>
-            <p>Enter initials: <input type="text " id="name"></p>
+            <p>Your final score is: <span id="finalScore"></span></p>
+            <p>Enter initials: <input type="text " id="playerName"></p>
             <button type="button" class="btn" id="submitName">Submit</button>
         </div>
-
-
+ 
+ 
         <!--Viewing all of the high scores-->
-
-
-
-
+        <div style="display: none" id="scorePanel">
+            <div id="scorePanelContent"></div>
+            <button type="button" class="btn" id="resetBtn">Reset</button>
+            <button type="button" class="btn" id="clearScoresBtn">Clear Scores</button>
+        </div>
+ 
+ 
+ 
     </div>
-
-
-
+ 
+ 
+ 
     <script src="./assets/js/script.js"></script>
-
+ 
 </body>
 </html>

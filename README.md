@@ -19,5 +19,4 @@ HTML, CSS and Javascript initialized by yours truly.
 
 
 ## Preview
-
-<!-- NEED TO ADD SCREENSHOT OF QUIZ AFTER FINISHING STYLES ARE ADDED -->
+(https://user-images.githubusercontent.com/85531188/126044022-5f0190f8-47af-45bd-8383-cbcee18dd284.png)

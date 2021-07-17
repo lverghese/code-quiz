@@ -34,10 +34,11 @@ header p {
 .box-wrapper {
     margin: 100px 150px;
     align-items: center;
-    padding: 50px 550px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-left: 250px;
+    padding-right: 250px;
 }
 
 .box-wrapper h2 {
@@ -63,17 +64,19 @@ header p {
 .finish {
     margin: 100px 150px;
     align-items: center;
-    padding: 50px 550px;
     display: block;
+    padding-left: 250px;
+    padding-right: 250px;
 }
 
 .highscorePanel {
     margin: 100px 150px;
     align-items: center;
-    padding: 50px 550px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-left: 250px;
+    padding-right: 250px;
 }
 
 button {
@@ -103,3 +106,47 @@ cursor: pointer;
 }
 
 
+
+@media screen and (max-width: 980px) {
+    header {
+        padding-bottom: 0;
+        justify-content: center;
+        position: relative;
+    }
+
+    header h1 {
+        width: 100%;
+        text-align: center;
+    }
+
+    header p {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .box-wrapper {
+        padding-bottom: 0;
+        justify-content: center;
+        position: relative;
+    }
+
+    .box-wrapper h2 {
+        margin-top: 10px;
+        width: 100%;
+        flex: 0 70%;
+    }
+
+    .finish {
+        padding-bottom: 0;
+        justify-content: center;
+        position: relative;
+    }
+
+    .finish h2 {
+        margin-top: 10px;
+        width: 100%;
+        flex: 0 70%;
+    }
+
+}

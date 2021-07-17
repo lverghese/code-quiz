@@ -13,13 +13,13 @@ header {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-
+    padding: 15px;
 }
 
 header h1 {
     color: teal;
-    font-size: medium;
     padding-left: 10px;
+    font-size: x-large;
 
 }
 
@@ -29,6 +29,7 @@ header p {
     justify-content: space-between;
     float: right;
     padding-right: 10px;
+    font-size: x-large;
 }
 
 .box-wrapper {

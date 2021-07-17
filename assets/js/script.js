@@ -46,18 +46,18 @@ var answerMessage = document.getElementById("answerMessage");
 var finalScore = document.getElementById("finalScore");
 var resetBtn = document.getElementById("resetBtn");
 var clearScoresBtn = document.getElementById("clearScoresBtn");
+var scoreContainer = document.getElementById("scoreTableContainer");
 var currentQuestion = 0;
 var runOnce = 0;
  
 //starts the time and subtracts 1 from total score every second
  
 var doTimer = null;
-
+ 
  
 var startClock = function() {
     timeClock--;
     scoreClock.innerHTML = timeClock - totalScore;
-    console.log(scoreClock);
     if(timeClock - totalScore <= 0){
         endGame();
     }
@@ -71,11 +71,10 @@ startBtn.addEventListener("click", function() {
     btn1.classList.remove("hiddenButton");
     btn2.classList.remove("hiddenButton");
     btn3.classList.remove("hiddenButton");
-    console.log("current q:" + currentQuestion);
     nextQuestion();
     startClock();
     doTimer = setInterval(startClock, 1000);
-
+ 
 });
  
 //runs whenever an answer button is clicked
@@ -102,7 +101,6 @@ var nextQuestion = function() {
     if (currentQuestion < questions.length){
         var questionTitle = document.getElementById("questions");
         if( runOnce === 0 ) {
-            console.log("HIT");
             btn0.addEventListener("click", function() {
                 checkAnswer(questions[currentQuestion].choices[0]);
             });
@@ -154,7 +152,7 @@ submitNameBtn.addEventListener("click", function(){
 //saves final score in localStorage
 var saveScore = function(){
     var scoreData = {
-            highScore: totalScore,
+            highScore: timeClock - totalScore,
             playerName: document.getElementById("playerName").value
         }
     if (localStorage.getItem("highScores") == null){
@@ -176,18 +174,47 @@ highScoreBtn.addEventListener("click", function(){
 });
  
 var loadHighScores = function(){
+    scoreContainer.innerHTML = "";
+    var scoreTable = document.createElement("table");
+    var scoreTableHead = document.createElement("thead");
+    var scoreTableHeadRow = document.createElement("tr");
+    var scoreTableHeadColPlayer = document.createElement("th");
+    var scoreTableHeadColScore = document.createElement("th");
+    scoreTableHeadColPlayer.appendChild(document.createTextNode("Player Name"));
+    scoreTableHeadColScore.appendChild(document.createTextNode("High Score"));
+    scoreTableHeadRow.appendChild(scoreTableHeadColPlayer);
+    scoreTableHeadRow.appendChild(scoreTableHeadColScore);
+    scoreTableHead.appendChild(scoreTableHeadRow);
+    scoreTable.appendChild(scoreTableHead);
+    scoreTable.style.display = "block";
     introBox.style.display = "none";
     questionWrapper.style.display = "none";
     finalScreen.style.display = "none";
     scorePanel.style.display = "block";
-    var outputItem = ""
+    var tableBody = document.createElement("tbody");
+    var bodyCreated = false;
     var currentHighScores = JSON.parse(localStorage.getItem("highScores"));
     if (currentHighScores != null ){
         for (i = 0; i < currentHighScores.length; i++){
-            outputItem = outputItem + ("PLAYER:" + currentHighScores[i].playerName + " SCORE:" + currentHighScores[i].highScore + "<br>")
+            var trow = document.createElement("tr");
+            var tdPlayer = document.createElement("td");
+            tdPlayer.appendChild(document.createTextNode(currentHighScores[i].playerName));
+            var tdScore = document.createElement("td");
+            tdScore.appendChild(document.createTextNode(currentHighScores[i].highScore));
+            trow.appendChild(tdPlayer);
+            trow.appendChild(tdScore);
+            if (bodyCreated){
+                tableBody.appendChild(trow);
+            } else {
+                tableBody.appendChild(trow);
+                scoreTable.appendChild(tableBody);
+                bodyCreated = true;
+            }
         }
-        scorePanelContent.innerHTML = outputItem
+        scoreContainer.appendChild(scoreTable);
+        scorePanelContent.innerHTML = "";
     } else {
+        scoreTable.style.display = "none";
         scorePanelContent.innerHTML = "There are no scores!";
     };
  
@@ -215,11 +242,12 @@ var resetGame = function(){
     playerName.value = "";
     
 }
-
-
+ 
+ 
  
 //clear all scores
 var clearScores = function(){
     localStorage.removeItem("highScores");
+    scoreContainer.innerHTML = ""
     loadHighScores();
 }

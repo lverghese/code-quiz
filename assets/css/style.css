@@ -81,6 +81,7 @@ background-color: rgb(129, 67, 129);
 padding: 10px;
 border-radius: 10px;
 color: white;
+cursor: pointer;
 }
 
 .scoreButton {
@@ -89,7 +90,12 @@ color: white;
 }
 
 .nameScore {
-    display: inline-block
+    display: block;
+}
+
+.scoreItem {
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .hiddenButton {

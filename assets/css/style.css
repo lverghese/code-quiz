@@ -37,6 +37,7 @@ header p {
     padding: 50px 550px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .box-wrapper h2 {
@@ -48,6 +49,15 @@ header p {
     text-align: center;
 }
 
+.choices-wrapper {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.answerMessage {
+    display: flex;
+    flex-wrap: wrap;
+}
 
 
 .finish {
@@ -57,11 +67,29 @@ header p {
     display: block;
 }
 
+.highscorePanel {
+    margin: 100px 150px;
+    align-items: center;
+    padding: 50px 550px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
 button {
 background-color: rgb(129, 67, 129);
 padding: 10px;
 border-radius: 10px;
 color: white;
+}
+
+.scoreButton {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.nameScore {
+    display: inline-block
 }
 
 .hiddenButton {

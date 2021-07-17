@@ -26,7 +26,7 @@
         <div class="box-wrapper" id="question-wrapper">
                 <h2 class="quetitle" id="questions"></h2>
  
-                <div class="box-wrapper" id="answers">
+                <div class="choices-wrapper" id="answers">
                     <div class="line">
                         <button type="button" class="btn hiddenButton" id="btn0"></button>
                     </div>
@@ -43,9 +43,10 @@
                         <button type="button" class="btn hiddenButton" id="btn4"></button>
                     </div>
                 </div>
-                <div id="answerMessage"></div>
+                <div class="answerMessage" id="answerMessage"></div>
  
         </div>
+        
  
         <!-- Quiz Finish Screen -->
         <div style="display:none;" class="finish" id="finalScreen">
@@ -57,10 +58,12 @@
  
  
         <!--Viewing all of the high scores-->
-        <div style="display: none" id="scorePanel">
-            <div id="scorePanelContent"></div>
-            <button type="button" class="btn" id="resetBtn">Reset</button>
-            <button type="button" class="btn" id="clearScoresBtn">Clear Scores</button>
+        <div class="highscorePanel" style="display: none" id="scorePanel">
+            <div class="nameScore" id="scorePanelContent">
+            </div>
+            <button type="button" class="ScoreBtn" id="resetBtn">Reset</button>
+                <button type="button" class="scoreBtn" id="clearScoresBtn">Clear Scores</button>
+            
         </div>
  
  

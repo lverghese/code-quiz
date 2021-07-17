@@ -47,14 +47,17 @@ var finalScore = document.getElementById("finalScore");
 var resetBtn = document.getElementById("resetBtn");
 var clearScoresBtn = document.getElementById("clearScoresBtn");
 var currentQuestion = 0;
+var runOnce = 0;
  
 //starts the time and subtracts 1 from total score every second
  
-var doTimer = setInterval(startClock, 1000);
+var doTimer = null;
+
  
 var startClock = function() {
     timeClock--;
     scoreClock.innerHTML = timeClock - totalScore;
+    console.log(scoreClock);
     if(timeClock - totalScore <= 0){
         endGame();
     }
@@ -63,6 +66,7 @@ var startClock = function() {
 //first function starts the questions and the scoreClock
 startBtn.addEventListener("click", function() {
     introBox.style.display = "none";
+    questionWrapper.style.display = "block";
     btn0.classList.remove("hiddenButton");
     btn1.classList.remove("hiddenButton");
     btn2.classList.remove("hiddenButton");
@@ -70,6 +74,8 @@ startBtn.addEventListener("click", function() {
     console.log("current q:" + currentQuestion);
     nextQuestion();
     startClock();
+    doTimer = setInterval(startClock, 1000);
+
 });
  
 //runs whenever an answer button is clicked
@@ -94,9 +100,8 @@ var checkAnswer = function(currentAnswer) {
 //advances to the next question
 var nextQuestion = function() {
     if (currentQuestion < questions.length){
-        var previousQuestion = currentQuestion -1;
         var questionTitle = document.getElementById("questions");
-        if( currentQuestion === 0 ) {
+        if( runOnce === 0 ) {
             console.log("HIT");
             btn0.addEventListener("click", function() {
                 checkAnswer(questions[currentQuestion].choices[0]);
@@ -112,7 +117,9 @@ var nextQuestion = function() {
         
             btn3.addEventListener("click", function() {
                 checkAnswer(questions[currentQuestion].choices[3]);
-            });
+            }); 
+            runOnce = 1;
+    
         };
         questionTitle.innerHTML = questions[currentQuestion].quetitle;
         btn0.innerHTML = questions[currentQuestion].choices[0];
@@ -129,6 +136,7 @@ var endGame = function(){
     clearInterval(doTimer);
     questionWrapper.style.display = "none";
     finalScreen.style.display = "block";
+    scoreClock.innerHTML = timeClock - totalScore;
     finalScore.innerHTML = timeClock - totalScore;
 };
  
@@ -194,17 +202,21 @@ resetBtn.addEventListener("click", function(){
 });
  
 //init all variables and restart the game
-//TODO:  this needs to be fixed so that the game will run properly when reset
+//TODO:  this needs to be fixed so that the game will run properly when reset; display needs to be set to block
 var resetGame = function(){
     currentQuestion = 0;
     scorePanel.style.display = "none";
     totalScore = 0;
     timeClock = 75;
+    scoreClock.innerHTML = timeClock
     finalScreen.style.display = "none";
-    introBox.style.display = " block";
+    introBox.style.display = "block";
     answerMessage.innerHTML = "";
     playerName.value = "";
+    
 }
+
+
  
 //clear all scores
 var clearScores = function(){
